@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { Navbar, NavItem, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import LoginNavItemContainer from '../containers/LoginNavItemContainer';
-
 // The Header creates links that can be used to navigate
 // between routes.
 const Header = () => (
@@ -18,9 +16,6 @@ const Header = () => (
       <LinkContainer to="/about">
         <NavItem eventKey={1}>About</NavItem>
       </LinkContainer>
-    </Nav>
-    <Nav pullRight>
-      <LoginNavItemContainer/>
     </Nav>
   </Navbar>
 );

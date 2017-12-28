@@ -5,21 +5,6 @@ function sessionCounter(state = { counter: 0 }) {
   return state;
 }
 
-const userDefault = {
-  uid: 0,
-  name: '',
-  fbToken: 0,
-};
-
-function user(state = userDefault, action) {
-  switch (action.type) {
-  case 'USER_UPDATED':
-    return action.user;
-  default:
-    return state;
-  }
-}
-
 const names = (state = [], action) => {
   switch (action.type) {
   case 'NAMES_UPDATED':
@@ -31,7 +16,6 @@ const names = (state = [], action) => {
 
 const reducer = combineReducers({
   sessionCounter,
-  user,
   names,
 });
 
