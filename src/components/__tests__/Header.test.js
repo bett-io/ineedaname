@@ -12,15 +12,12 @@ describe('Header component', () => {
     expect(toJson(rendered)).toMatchSnapshot();
   });
 
-  test('contains 3 <NavItem />s', () => {
-    expect(shallow(<Header />).find('NavItem')).toHaveLength(3);
+  test('contains 1 <NavItem />s', () => {
+    expect(shallow(<Header />).find('NavItem')).toHaveLength(1);
   });
 
   test('contains links to about, repos and hello', () => {
     const component = shallow(<Header />).find('LinkContainer');
     expect(component.findWhere(n => n.props().to === '/about')).toHaveLength(1);
-    expect(component.findWhere(n => n.props().to === '/repos')).toHaveLength(1);
-    expect(component.findWhere(n => n.props().to === '/repo')).toHaveLength(0);
-    expect(component.findWhere(n => n.props().to === '/hello')).toHaveLength(1);
   });
 });

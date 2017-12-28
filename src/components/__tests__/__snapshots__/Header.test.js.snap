@@ -36,45 +36,6 @@ exports[`Header component should pass snapshot check 1`] = `
         About
       </NavItem>
     </LinkContainer>
-    <LinkContainer
-      activeClassName="active"
-      exact={false}
-      replace={false}
-      strict={false}
-      to="/repos"
-    >
-      <NavItem
-        active={false}
-        disabled={false}
-        eventKey={2}
-      >
-        Repos
-      </NavItem>
-    </LinkContainer>
-    <LinkContainer
-      activeClassName="active"
-      exact={false}
-      replace={false}
-      strict={false}
-      to="/hello"
-    >
-      <NavItem
-        active={false}
-        disabled={false}
-        eventKey={3}
-      >
-        Hello
-      </NavItem>
-    </LinkContainer>
-  </Nav>
-  <Nav
-    bsClass="nav"
-    justified={false}
-    pullLeft={false}
-    pullRight={true}
-    stacked={false}
-  >
-    <Connect(LoginNavItemContainer) />
   </Nav>
 </Uncontrolled(Navbar)>
 `;

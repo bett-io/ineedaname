@@ -18,12 +18,6 @@ const Header = () => (
       <LinkContainer to="/about">
         <NavItem eventKey={1}>About</NavItem>
       </LinkContainer>
-      <LinkContainer to="/repos">
-        <NavItem eventKey={2}>Repos</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/hello">
-        <NavItem eventKey={3}>Hello</NavItem>
-      </LinkContainer>
     </Nav>
     <Nav pullRight>
       <LoginNavItemContainer/>
