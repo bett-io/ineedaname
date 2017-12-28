@@ -20,9 +20,19 @@ function user(state = userDefault, action) {
   }
 }
 
+const names = (state = [], action) => {
+  switch (action.type) {
+  case 'NAMES_UPDATED':
+    return action.names;
+  default:
+    return state;
+  }
+};
+
 const reducer = combineReducers({
   sessionCounter,
   user,
+  names,
 });
 
 export default reducer;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import connectWithRouter from '../../modules/connectWithRouter';
-import Home from '../components/Home';
+import ServiceNameContainer from './ServiceNameContainer';
 import Repos from '../components/Repos';
 import About from '../components/About';
 import Hello from '../components/Hello';
@@ -15,7 +15,7 @@ const MainContainer = ({ sessionCounter }) => (
       (Note that this value is incresed only when server side rendering requested)
     </div>
     <Switch>
-      <Route exact path='/' component={Home}/>
+      <Route exact path='/' component={ServiceNameContainer}/>
       <Route path='/repos' component={Repos}/>
       <Route path='/hello' component={Hello}/>
       <Route path='/about' component={About}/>
