@@ -1,10 +1,5 @@
 import { combineReducers } from 'redux';
 
-function sessionCounter(state = { counter: 0 }) {
-  // This value never changes from initial value which is given from server
-  return state;
-}
-
 const names = (state = [], action) => {
   switch (action.type) {
   case 'NAMES_UPDATED':
@@ -15,7 +10,6 @@ const names = (state = [], action) => {
 };
 
 const reducer = combineReducers({
-  sessionCounter,
   names,
 });
 

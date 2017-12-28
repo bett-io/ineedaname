@@ -4,9 +4,6 @@ import session from 'express-session';
 
 const createInitialReduxState = (session) => {
   const state = {
-    sessionCounter: {
-      counter: session.counter,
-    },
   };
 
   if (session.uid && session.name && session.pictureUrl && session.fbToken) {
