@@ -1,5 +1,5 @@
-import probTable1 from '../data/probTable1';
-import probTable2 from '../data/probTable2';
+import defProbTable1 from '../data/probTable1';
+import defProbTable2 from '../data/probTable2';
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
@@ -12,11 +12,14 @@ const pickNextChar = (probTable, last) => {
   return [...alphabet].find(c => {
     counter += (probTable[last][c] || 0);
 
-    return counter > random;
+    return counter >= random;
   }) || '';
 };
 
-export const generateName = prefix => {
+export const generateName = (prefix, probTable1, probTable2) => {
+  const prob1 = probTable1 || defProbTable1;
+  const prob2 = probTable2 || defProbTable2;
+
   let last1 = prefix.substr(-1, 1);
   let last2 = prefix.substr(-2, 2);
 
@@ -24,8 +27,8 @@ export const generateName = prefix => {
   let next = '';
 
   do {
-    const next1 = pickNextChar(probTable1, last1);
-    const next2 = pickNextChar(probTable2, last2);
+    const next1 = pickNextChar(prob1, last1);
+    const next2 = pickNextChar(prob2, last2);
 
     next = next2 === false ? next1 : next2;
 
@@ -36,4 +39,16 @@ export const generateName = prefix => {
   } while(next);
 
   return name;
+};
+
+export const generateNames = (prefix, count, probTable1, probTable2) => {
+  let names = [];
+
+  do {
+    const newName = generateName(prefix, probTable1, probTable2);
+
+    if (names.indexOf(newName) === -1) names.push(newName);
+  } while(names.length < count);
+
+  return names;
 };
