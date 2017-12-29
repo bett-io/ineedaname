@@ -27,6 +27,24 @@ describe('generateName', () => {
 
     expect(name1.length + name2.length).toBeLessThan(12);
   });
+
+  test('shouldn\'t generate too short words.', () => {
+    const probTable1 = {
+      '': { 'sum': 10, 'a': 1, '': 9 },
+      'a': { 'sum': 10, 'b': 1, '': 9 },
+      'b': { 'sum': 10, 'c': 1, '': 9 },
+      'c': { 'sum': 1, '': 1 },
+    };
+    const probTable2 = {
+      '': { 'sum': 1, '': 1 },
+    };
+
+    // To minimise false positive, generate name twice and check.
+    const name1 = generateName('', { probTable1, probTable2 });
+    const name2 = generateName('', { probTable1, probTable2 });
+
+    expect(name1.length + name2.length).toEqual(6);
+  });
 });
 
 describe('generateNames', () => {

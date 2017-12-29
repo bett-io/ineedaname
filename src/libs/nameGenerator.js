@@ -2,6 +2,7 @@ import defProbTable1 from '../data/probTable1';
 import defProbTable2 from '../data/probTable2';
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+const minLen = 3;
 
 const probsWithTerminalWeight = (probs, terminalWeight) => {
   if (!probs[''] || terminalWeight === 1) return probs;
@@ -61,7 +62,7 @@ export const generateName = (prefix, options) => {
 
     last1 = next;
     last2 = last2[1] + next;
-  } while(next);
+  } while(next || name.length < minLen);
 
   return name;
 };
