@@ -2,10 +2,10 @@ import { generateNames } from '../nameGenerator';
 
 describe('generateNames', () => {
   test('should return all different names of given number', () => {
-    const prob1 = {
+    const probTable1 = {
       '': { 'sum': 1, '': 1 },
     };
-    const prob2 = {
+    const probTable2 = {
       'xx': { 'sum': 5, 'a': 1, 'b': 1, 'c': 1, 'd': 1, 'e': 1, '': 0 },
       'xa': { 'sum': 1, '': 1 },
       'xb': { 'sum': 1, '': 1 },
@@ -13,7 +13,7 @@ describe('generateNames', () => {
       'xd': { 'sum': 1, '': 1 },
       'xe': { 'sum': 1, '': 1 },
     };
-    const names = generateNames('xx', 5, prob1, prob2);
+    const names = generateNames('xx', 5, { probTable1, probTable2 });
 
     expect(names).toHaveLength(5);
     expect(names).toEqual(expect.arrayContaining(['xxa', 'xxb', 'xxc', 'xxd', 'xxe']));

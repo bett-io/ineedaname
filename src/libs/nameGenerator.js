@@ -16,9 +16,9 @@ const pickNextChar = (probTable, last) => {
   }) || '';
 };
 
-export const generateName = (prefix, probTable1, probTable2) => {
-  const prob1 = probTable1 || defProbTable1;
-  const prob2 = probTable2 || defProbTable2;
+export const generateName = (prefix, options) => {
+  const prob1 = (options && options.probTable1) || defProbTable1;
+  const prob2 = (options && options.probTable2) || defProbTable2;
 
   let last1 = prefix.substr(-1, 1);
   let last2 = prefix.substr(-2, 2);
@@ -41,11 +41,11 @@ export const generateName = (prefix, probTable1, probTable2) => {
   return name;
 };
 
-export const generateNames = (prefix, count, probTable1, probTable2) => {
+export const generateNames = (prefix, count, options) => {
   let names = [];
 
   do {
-    const newName = generateName(prefix, probTable1, probTable2);
+    const newName = generateName(prefix, options);
 
     if (names.indexOf(newName) === -1) names.push(newName);
   } while(names.length < count);
