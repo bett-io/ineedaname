@@ -6,3 +6,4 @@ standalone/
 npm-debug.log
 .eslintcache
 .tmp/
+.lambda/
