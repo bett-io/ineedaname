@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const listNames = names => names.map(name => (<p>{ name }</p>));
+const listNames = names => names.map(name => (<li key={ name }>{ name }</li>));
 
 const NameResult = props => {
   const {
@@ -11,7 +11,9 @@ const NameResult = props => {
 
   return (
     <div>
-      { listNames(names) }
+      <ul>
+        { listNames(names) }
+      </ul>
     </div>
   );
 };
