@@ -1,4 +1,33 @@
-import { generateNames } from '../nameGenerator';
+import { generateName, generateNames } from '../nameGenerator';
+
+describe('generateName', () => {
+  test('should support terminalWeight and not generate too long word based on it.', () => {
+    const probTable1 = {
+      '': { 'sum': 1, '': 1 },
+    };
+    const probTable2 = {
+      'ab': { 'sum': 1, 'c': 1 },
+      'bc': { 'sum': 1, 'd': 1 },
+      'cd': { 'sum': 1, 'e': 1 },
+      'de': { 'sum': 1000, '': 1, 'f': 999 },
+      'ef': { 'sum': 1, '': 1 },
+    };
+    const terminalWeightTable = {
+      // Use 100000000% of '' if the length of the current word is longer than or equal to 4.
+      // In result, it is more likely to generate words shorter than 4.
+      '4': 1000000,
+    };
+
+    // As the generate function works based on random function, there is still small possibility
+    // it returns false negative result('abcdef') even when terminalWeight works properly.
+    // To prevent the false failure, generate two words and check the total length of two words.
+    // This will lower the false failure possibility.
+    const name1 = generateName('ab', { probTable1, probTable2, terminalWeightTable });
+    const name2 = generateName('ab', { probTable1, probTable2, terminalWeightTable });
+
+    expect(name1.length + name2.length).toBeLessThan(12);
+  });
+});
 
 describe('generateNames', () => {
   test('should return all different names of given number', () => {

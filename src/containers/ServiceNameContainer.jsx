@@ -34,8 +34,13 @@ const mapDispatchToProps = dispatch => {
   return {
     onServiceNamesRequest: prefix => {
       const countOfNames = 10;
+      const terminalWeightTable = {
+        '7': 3, // x2 the probability to end word. Thus, lower the posibility of word which is longer than 7.
+        '9': 10,
+        '11': 100,
+      };
 
-      dispatch(namesUpdated(generateNames(prefix, countOfNames)));
+      dispatch(namesUpdated(generateNames(prefix, countOfNames, { terminalWeightTable })));
     },
   };
 };

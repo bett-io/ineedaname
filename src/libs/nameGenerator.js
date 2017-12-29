@@ -3,17 +3,40 @@ import defProbTable2 from '../data/probTable2';
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
-const pickNextChar = (probTable, last) => {
+const probsWithTerminalWeight = (probs, terminalWeight) => {
+  if (!probs[''] || terminalWeight === 1) return probs;
+
+  const newTerminalCount = probs[''] * terminalWeight;
+  const newSumCount = probs['sum'] + newTerminalCount - probs[''];
+
+  return Object.assign({}, probs, { 'sum': newSumCount, '': newTerminalCount });
+};
+
+const pickNextChar = (probTable, last, terminalWeight) => {
   if (!probTable[last]) return false;
 
-  const random = Math.floor((Math.random() * probTable[last]['sum']) + 1);
+  const probs = probsWithTerminalWeight(probTable[last], terminalWeight);
+
+  const random = Math.floor((Math.random() * probs['sum']) + 1);
   let counter = 0;
 
   return [...alphabet].find(c => {
-    counter += (probTable[last][c] || 0);
+    counter += (probs[c] || 0);
 
     return counter >= random;
   }) || '';
+};
+
+const calcTerminalWeight = (weightTable, length) => {
+  if (!weightTable) return 1;
+
+  for (let i = length; i > 0; i--) {
+    if (weightTable[i]) {
+      return weightTable[i];
+    }
+  }
+
+  return 1;
 };
 
 export const generateName = (prefix, options) => {
@@ -27,8 +50,10 @@ export const generateName = (prefix, options) => {
   let next = '';
 
   do {
-    const next1 = pickNextChar(prob1, last1);
-    const next2 = pickNextChar(prob2, last2);
+    const terminalWeight = calcTerminalWeight(options.terminalWeightTable, name.length);
+
+    const next1 = pickNextChar(prob1, last1, terminalWeight);
+    const next2 = pickNextChar(prob2, last2, terminalWeight);
 
     next = next2 === false ? next1 : next2;
 
