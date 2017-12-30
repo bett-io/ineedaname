@@ -11,9 +11,6 @@ import { Provider } from 'react-redux';
 
 import createReduxStore from '../modules/store';
 
-import auth from './apis/auth';
-import session from './libs/session';
-
 import App from '../src/containers/App';
 
 const file = 'server/app.js';
@@ -21,7 +18,6 @@ const file = 'server/app.js';
 const app = express();
 
 app.use(bodyParser.json()); // for parsing POST body
-app.use(session.createSessionMiddleware());
 app.use(express.static(path.join(__dirname, './public')));
 
 app.get('*', (req, res) => {
@@ -29,12 +25,7 @@ app.get('*', (req, res) => {
 
   const context = {};
 
-  // counter in session for demo
-  if (!req.session.counter) req.session.counter = 0;
-  req.session.counter++;
-
-  const initialState = session.createInitialReduxState(req.session);
-  const store = createReduxStore(initialState);
+  const store = createReduxStore({});
 
   const appHtml = renderToString(
     <Provider store={store}>
@@ -51,23 +42,6 @@ app.get('*', (req, res) => {
   } else {
     res.send(renderPage(appHtml, store.getState()));
   }
-});
-
-app.post('/signin', (req, res) => {
-  console.log({ file, function:'post', req: { url: req.url } });
-
-  auth.signin(req)
-    .then((result) => res.send(result))
-    .catch((error) => {
-      console.log({ file, function: 'post', error });
-      res.status(403).send(error);
-    });
-});
-
-app.post('/signout', (req, res) => {
-  console.log({ function:'app.post', req: { url: req.url } });
-
-  res.send(auth.signout(req, res));
 });
 
 function renderPage(appHtml, initialState) {
