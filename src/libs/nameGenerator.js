@@ -1,10 +1,17 @@
+// @flow
+
 import defProbTable1 from '../data/probTable1';
 import defProbTable2 from '../data/probTable2';
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 const minLen = 3;
 
-const probsWithTerminalWeight = (probs, terminalWeight) => {
+type Probs = {
+  '': ?number,
+  'sum': number,
+}
+
+const probsWithTerminalWeight = (probs: Probs, terminalWeight: number) => {
   if (!probs[''] || terminalWeight === 1) return probs;
 
   const newTerminalCount = probs[''] * terminalWeight;
@@ -13,8 +20,8 @@ const probsWithTerminalWeight = (probs, terminalWeight) => {
   return Object.assign({}, probs, { 'sum': newSumCount, '': newTerminalCount });
 };
 
-const pickNextChar = (probTable, last, terminalWeight) => {
-  if (!probTable[last]) return false;
+const pickNextChar = (probTable: {}, last: string, terminalWeight: number): string => {
+  if (!probTable[last]) return 'noProb';
 
   const probs = probsWithTerminalWeight(probTable[last], terminalWeight);
 
@@ -40,7 +47,13 @@ const calcTerminalWeight = (weightTable, length) => {
   return 1;
 };
 
-export const generateName = (prefix, options) => {
+export type Options = {
+  probTable1: ?{},
+  probTable2: ?{},
+  terminalWeightTable: ?{},
+}
+
+export const generateName = (prefix: string, options: Options): string => {
   const prob1 = (options && options.probTable1) || defProbTable1;
   const prob2 = (options && options.probTable2) || defProbTable2;
 
@@ -56,7 +69,7 @@ export const generateName = (prefix, options) => {
     const next1 = pickNextChar(prob1, last1, terminalWeight);
     const next2 = pickNextChar(prob2, last2, terminalWeight);
 
-    next = next2 === false ? next1 : next2;
+    next = next2 === 'noProb' ? next1 : next2;
 
     name += next;
 
@@ -67,7 +80,7 @@ export const generateName = (prefix, options) => {
   return name;
 };
 
-export const generateNames = (prefix, count, options) => {
+export const generateNames = (prefix: string, count: number, options: Options): Array<string> => {
   let names = [];
 
   do {
