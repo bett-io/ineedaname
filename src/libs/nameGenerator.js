@@ -73,8 +73,8 @@ export const generateName = (prefix: string, options: Options): string => {
 
     name += next;
 
-    last1 = next;
-    last2 = last2[1] + next;
+    last1 = name.substr(-1, 1);
+    last2 = name.substr(-2, 2);
   } while(next || name.length < minLen);
 
   return name;

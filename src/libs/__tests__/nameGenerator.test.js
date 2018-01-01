@@ -36,14 +36,15 @@ describe('generateName', () => {
       'c': { 'sum': 1, '': 1 },
     };
     const probTable2 = {
-      '': { 'sum': 1, '': 1 },
+      'xx': { 'sum': 1, '': 1 },
     };
 
     // To minimise false positive, generate name twice and check.
     const name1 = generateName('', { probTable1, probTable2 });
     const name2 = generateName('', { probTable1, probTable2 });
 
-    expect(name1.length + name2.length).toEqual(6);
+    expect(name1).toBe('abc');
+    expect(name2).toBe('abc');
   });
 });
 
