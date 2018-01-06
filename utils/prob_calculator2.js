@@ -15,13 +15,15 @@ rl.on('close', () => {
 });
 
 const count = (probs, prev, next) => {
-  if (!probs[prev]) probs[prev] = { sum: 0, '': 0 };
-  if (!probs[prev][next]) probs[prev][next] = 0;
+  const newProbs = probs;
 
-  probs[prev][next]++;
-  probs[prev]['sum']++;
+  if (!newProbs[prev]) newProbs[prev] = { sum: 0, '': 0 };
+  if (!newProbs[prev][next]) newProbs[prev][next] = 0;
 
-  return probs;
+  newProbs[prev][next]++;
+  newProbs[prev]['sum']++;
+
+  return newProbs;
 };
 
 const processLine = (line) => {
@@ -30,7 +32,7 @@ const processLine = (line) => {
   let prev = '';
   let pprev = '';
 
-  [...lline].forEach(c => {
+  [...lline].forEach((c) => {
     if (c < 'a' || c > 'z') return;
 
     if (pprev !== '') probs = count(probs, pprev + prev, c);

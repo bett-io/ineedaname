@@ -28,7 +28,7 @@ const pickNextChar = (probTable: {}, last: string, terminalWeight: number): stri
   const random = Math.floor((Math.random() * probs['sum']) + 1);
   let counter = 0;
 
-  return [...alphabet].find(c => {
+  return [...alphabet].find((c) => {
     counter += (probs[c] || 0);
 
     return counter >= random;
@@ -75,19 +75,19 @@ export const generateName = (prefix: string, options: Options): string => {
 
     last1 = name.substr(-1, 1);
     last2 = name.substr(-2, 2);
-  } while(next || name.length < minLen);
+  } while (next || name.length < minLen);
 
   return name;
 };
 
 export const generateNames = (prefix: string, count: number, options: Options): Array<string> => {
-  let names = [];
+  const names = [];
 
   do {
     const newName = generateName(prefix, options);
 
     if (names.indexOf(newName) === -1) names.push(newName);
-  } while(names.length < count);
+  } while (names.length < count);
 
   return names;
 };

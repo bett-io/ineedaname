@@ -7,7 +7,7 @@ import NameInputForm from '../components/NameInputForm';
 import NameResult from '../components/NameResult';
 import PropTypes from 'prop-types';
 
-const ServiceNameContainer = props => {
+const ServiceNameContainer = (props) => {
   const {
     names,
     onServiceNamesRequest,
@@ -26,26 +26,22 @@ ServiceNameContainer.propTypes = {
   onServiceNamesRequest: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => {
-  return { names: state.names };
-};
+const mapStateToProps = state => ({ names: state.names });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onServiceNamesRequest: prefix => {
-      const countOfNames = 10;
-      const terminalWeightTable = {
-        '7': 3, // x2 the probability to end word. Thus, lower the posibility of word which is longer than 7.
-        '9': 10,
-        '11': 100,
-      };
+const mapDispatchToProps = dispatch => ({
+  onServiceNamesRequest: (prefix) => {
+    const countOfNames = 10;
+    const terminalWeightTable = {
+      '7': 3, // x2 the probability to end word. Thus, lower the posibility of word which is longer than 7.
+      '9': 10,
+      '11': 100,
+    };
 
-      dispatch(namesUpdated(generateNames(prefix, countOfNames, { terminalWeightTable })));
-    },
-  };
-};
+    dispatch(namesUpdated(generateNames(prefix, countOfNames, { terminalWeightTable })));
+  },
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ServiceNameContainer);

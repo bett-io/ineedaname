@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const NameInputForm = props => {
+const NameInputForm = (props) => {
   const {
     onSubmit,
   } = props;

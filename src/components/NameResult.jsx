@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const listNames = names => names.map(name => (<li key={ name }>{ name }</li>));
 
-const NameResult = props => {
+const NameResult = (props) => {
   const {
     names,
   } = props;
