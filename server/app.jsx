@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 
 import bodyParser from 'body-parser';
+import { getGoodServiceNameProbs } from '../src/data/goodServiceNameProbs';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
@@ -25,7 +26,10 @@ app.get('*', (req, res) => {
 
   const context = {};
 
-  const store = createReduxStore({});
+  const store = createReduxStore({
+    goodServiceNameProb1: getGoodServiceNameProbs(1),
+    goodServiceNameProb2: getGoodServiceNameProbs(2),
+  });
 
   const appHtml = renderToString(
     <Provider store={store}>
