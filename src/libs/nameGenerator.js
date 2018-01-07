@@ -50,11 +50,11 @@ const calcTerminalWeight = (weightTable, length) => {
 };
 
 export type Options = {
-  probTable1: ?{},
-  probTable2: ?{},
-  probTableWeight1: ?number,
-  probTableWeight2: ?number,
-  terminalWeightTable: ?{},
+  probTable1?: {},
+  probTable2?: {},
+  probTableWeight1?: number,
+  probTableWeight2?: number,
+  terminalWeightTable?: {},
 }
 
 const selectChar = (string1: string, string2: string, weight1: number, weight2: number): string => {
