@@ -20,7 +20,7 @@ describe('generateName', () => {
       probTableWeight1: 0,
       probTableWeight2: 1,
       terminalWeightTable,
-    }
+    };
 
     // As the generate function works based on random function, there is still small possibility
     // it returns false negative result('abcdef') even when terminalWeight works properly.
@@ -46,7 +46,7 @@ describe('generateName', () => {
     const options = {
       probTable1,
       probTable2,
-    }
+    };
 
     // To minimise false positive, generate name twice and check.
     const name1 = generateName('', options);
@@ -72,7 +72,7 @@ describe('generateName', () => {
       probTable2,
       probTableWeight1: 1,
       probTableWeight2: 0,
-    }
+    };
 
     // To minimise false positive, generate name twice and check.
     const name1 = generateName('', options);
@@ -85,9 +85,6 @@ describe('generateName', () => {
 
 describe('generateNames', () => {
   test('should return all different names of given number', () => {
-    const probTable1 = {
-      '': { 'sum': 1, '': 1 },
-    };
     const probTable2 = {
       'xx': { 'sum': 5, 'a': 1, 'b': 1, 'c': 1, 'd': 1, 'e': 1, '': 0 },
       'xa': { 'sum': 1, '': 1 },
