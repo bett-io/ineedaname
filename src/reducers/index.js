@@ -9,8 +9,11 @@ const names = (state = [], action) => {
   }
 };
 
+const goodServiceNameProbs = (state = {}) => state;
+
 const reducer = combineReducers({
   names,
+  goodServiceNameProbs,
 });
 
 export default reducer;

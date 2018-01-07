@@ -27,8 +27,10 @@ app.get('*', (req, res) => {
   const context = {};
 
   const store = createReduxStore({
-    goodServiceNameProb1: getGoodServiceNameProbs(1),
-    goodServiceNameProb2: getGoodServiceNameProbs(2),
+    goodServiceNameProbs: {
+      '1': getGoodServiceNameProbs(1),
+      '2': getGoodServiceNameProbs(2),
+    }
   });
 
   const appHtml = renderToString(
